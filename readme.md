@@ -5,9 +5,10 @@ The jupyter notebook files in this repository contain the output that was genera
 
 These notebooks are supplementary material. Please regard the notebook DataStructure.ipynb to get an overview of how our data was structured. The reader is also referred to our published dataset on data.4tu.nl XXX add reference.
  
-Files
-|Filename|Description|
-|---|---|
-|DataStructure.ipynb|   |  
-|   |   |   
-|   |   |
+| File   | Description |
+|--------|-------------|
+| blabla | blibla      |
+|        |             |
+|        |             |
+|        |             |
+|        |             |
