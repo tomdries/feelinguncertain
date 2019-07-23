@@ -6,6 +6,7 @@ from scipy import stats
 
 import pickle
 
+
 def save_obj(obj, name, path = 'obj/'):
     with open(path + name + '.pkl', 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
@@ -38,7 +39,7 @@ def load_recordings(participant, run, participantfolder):
     return file_si, file_py
 
 def f(x):
-	# 
+	# helper function for later function
     key = x['nearestF']
     key = f'v{key}'
 
@@ -48,6 +49,7 @@ def f(x):
         return x[key]
 
 def f_ttp(x):
+    # another helper
     s = x['sNearestF']
     vEgo = x['vEgo']
     vNearestF = x['vNearestF']
@@ -112,28 +114,27 @@ def ttp_fog_front(run, stamps, participantfolder):
     #ttp9list = []
     r = run
     i_p = 0
+
+    #create figure frame
     fig, axes = plt.subplots(14,8, figsize = (9,25), sharey = True)
     
-     
+    
+    # go through participants
     for p in participants:
-        print(p)
+        print(p) #print current participant to get a sense of the progress
+
         ttp9list = []
         nearestto9list = []
         stampsprun = stamps.loc[(stamps['participant']== p) & (stamps['run'] == r)]
-        frontidx = stampsprun.apply(lambda x: 'F' in x['direction'], axis = 1)
-        
 
+        # select only trials where vehicle approached from front (has 'F' in it)
+        frontidx = stampsprun.apply(lambda x: 'F' in x['direction'], axis = 1)
         stampsF = stampsprun[frontidx]
-        
-        stampsF = list(stampsF['t_pass']) # passing timestamps
-#         return stampsF
-#         stampsF = [x for x in stampsF if ~np.isnan(x)]
+        stampsF = list(stampsF['t_pass']) 
         stampsF = [stampsF[0] - 15000] + stampsF
        
         
-
-        # front vehicles in rain
-
+        #for all time stamps in stamsF
         for i in range(len(stampsF)-1):
             if np.isnan(stampsF[i+1]):
                 ttp9list.append(np.nan)
@@ -146,7 +147,7 @@ def ttp_fog_front(run, stamps, participantfolder):
                 g = np.array([9] * len(h))
                 idx9 = np.argwhere(np.diff(np.sign(h - g))).flatten()
 
-                try:
+                try: # try to find an intersection with TTP=9 line
                     ttp9stamp = sliced.iloc[min(idx9)]['MeasurementTime']
                     ttp9idx = min(idx9)
                     ttp9prev = sliced.iloc[min(idx9)-1]['ttpF']
@@ -174,7 +175,8 @@ def ttp_fog_front(run, stamps, participantfolder):
                 
                 ttp9list.append(ttp9stamp)
                 nearestto9list.append(nearestto9)
-                #plot
+
+                #add axes to plot frame
                 sliced['ttpF'].plot(ax=axes[i_p,i])
                 axes[i_p, i].set_ylim([0,20])
 
@@ -187,7 +189,8 @@ def ttp_fog_front(run, stamps, participantfolder):
                     pass
 
         i_p +=1
-
+        
+        # Organize output
         fig.suptitle(run)
         stamps.iloc[frontidx[frontidx].index, 13] = ttp9list
         stamps.iloc[frontidx[frontidx].index, 14] = nearestto9list
