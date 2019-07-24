@@ -1,3 +1,5 @@
+# By Tom Driessen. Some more helper functions to keep the jupyter notebooks less cluttered.
+
 import pandas as pd
 import numpy as np
 from os import listdir
