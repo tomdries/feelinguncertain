@@ -1,0 +1,1 @@
+The files in this folder were created during a test run by the experimenters and thus contains no participant data. 
