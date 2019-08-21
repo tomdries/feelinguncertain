@@ -1,5 +1,5 @@
 # Readme
-This repository belongs to the MSc. Thesis by Tom Driessen. It can be found in the [TU Delft repository](https://repository.tudelft.nl). 
+This repository belongs to the MSc. Thesis by Tom Driessen. It can be found in the [TU Delft repository](http://resolver.tudelft.nl/uuid:ea30f1c8-70d6-493c-948b-3b6e0c398c3a). 
 
 The jupyter notebook files in this repository contain the code for the analysis part of the thesis. The notebooks are stored in the Analysis folder in html form, these can be viewed directly in the browser. In the underlying /code folder, the same notebooks can be found in .ipynb format. 
 
